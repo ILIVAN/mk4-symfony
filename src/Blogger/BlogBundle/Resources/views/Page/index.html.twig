@@ -1,0 +1,50 @@
+{# src/Blogger/BlogBundle/Resources/views/Page/index.html.twig #}
+{% extends 'BloggerBlogBundle::layout.html.twig' %}
+
+{% block title %}Homepage{% endblock%}
+
+{% block body %}
+    <div class="page-header">
+        <h1>Categories</h1>
+    </div>
+    <div class="col-md-6">
+        <div class="page-header">
+            <a href="{{ path('BloggerBlogBundle_blog_showcategory', { 'category': 'Sport', 'page': 1}) }}" class="list-group-item list-group-item-info">Sport</a>
+        </div>
+        <div class="list-group">
+            {% for blog in sport %}
+               <a href="{{ path('BloggerBlogBundle_blog_show', { 'id': blog.id, 'slug': blog.slug }) }}"><button type="button" class="list-group-item">{{ blog.title(10) }}</button></a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="page-header">
+            <a href="{{ path('BloggerBlogBundle_blog_showcategory', { 'category': 'Capital', 'page': 1 }) }}" class="list-group-item list-group-item-info">Capital</a>
+        </div>
+        <div class="list-group">
+            {% for blog in capital %}
+                <a href="{{ path('BloggerBlogBundle_blog_show', { 'id': blog.id, 'slug': blog.slug }) }}"><button type="button" class="list-group-item">{{ blog.title(30) }}</button></a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="page-header">
+            <a href="{{ path('BloggerBlogBundle_blog_showcategory', { 'category': 'Nature', 'page': 1 }) }}" class="list-group-item list-group-item-info">Nature</a>
+        </div>
+        <div class="list-group">
+            {% for blog in nature %}
+                <a href="{{ path('BloggerBlogBundle_blog_show', { 'id': blog.id, 'slug': blog.slug }) }}"><button type="button" class="list-group-item">{{ blog.title(30) }}</button></a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="page-header">
+            <a href="{{ path('BloggerBlogBundle_blog_showcategory', { 'category': 'Culture', 'page': 1 }) }}" class="list-group-item list-group-item-info">Culture</a>
+        </div>
+        <div class="list-group">
+            {% for blog in culture %}
+                <a href="{{ path('BloggerBlogBundle_blog_show', { 'id': blog.id, 'slug': blog.slug }) }}"><button type="button" class="list-group-item">{{ blog.title(30) }}</button></a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

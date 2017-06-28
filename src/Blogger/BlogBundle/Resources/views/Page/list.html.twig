@@ -1,0 +1,34 @@
+{# total items count #}
+{% extends 'BloggerBlogBundle::layout.html.twig' %}
+{% block body %}
+    <div class="meta">
+        <p>Total count etries: <span class="highlight">{{ pagination.getTotalItemCount }}</span></p>
+    </div>
+    {# display navigation #}
+    {% for item in pagination.items %}
+        <article class="blog">
+            <div class="date"><time datetime="{{ item.created|date('c') }}">{{ item.created|date('l, F j, Y') }}</time></div>
+            <header>
+                <h2><a href="{{ path('BloggerBlogBundle_blog_show', { 'id': item.id, 'slug': item.slug }) }}">{{ item.title }}</a></h2>
+            </header>
+
+            <img src="{{ asset(['images/', item.image]|join) }}" />
+            <div class="snippet">
+                <p>{{ item.blog(500) }}</p>
+                <p class="continue"><a href="{{ path('BloggerBlogBundle_blog_show', { 'id': item.id, 'slug': item.slug }) }}">Continue reading...</a></p>
+            </div>
+
+            <footer class="meta">
+                <p>Category: <a href="{{ path('BloggerBlogBundle_blog_showcategory', { 'category': item.category, 'page':1 }) }}"><span class="highlight">{{ item.category }}</span></a></p>
+                <p>Comments: <a href="{{ path('BloggerBlogBundle_blog_show', { 'id': item.id, 'slug': item.slug }) }}#comments">{{ item.comments|length }}</a></p>
+                <p>Posted by <span class="highlight">{{ item.author }}</span> at {{ item.created|date('h:iA') }}</p>
+                <p>Tags: <span class="highlight">{{ item.tags }}</span></p>
+            </footer>
+        </article>
+    {% else %}
+        <p>There are no blog entries for symblog</p>
+    {% endfor %}
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}
